@@ -55,6 +55,9 @@ enum Command {
         /// Run Chrome in headless mode (no visible window)
         #[arg(long)]
         headless: bool,
+        /// Force start by killing any existing Chrome on the debugging port
+        #[arg(short, long)]
+        force: bool,
     },
     /// Stop the running Chrome browser
     Stop,
@@ -305,7 +308,16 @@ fn run(cli: Cli) -> Result<()> {
 
     match &cli.command {
         // Browser lifecycle commands
-        Command::Start { headless } => {
+        Command::Start { headless, force } => {
+            // If force flag is set, kill any existing Chrome on the port first
+            if *force {
+                let killed = kill_chrome_by_port(cli.port);
+                if killed && !cli.quiet {
+                    eprintln!("Killed existing Chrome on port {}", cli.port);
+                }
+                // Give Chrome time to fully shut down
+                std::thread::sleep(std::time::Duration::from_millis(500));
+            }
             let server = create_server(&cli);
             let result = server.start_browser(*headless)?;
             // Detach Chrome so it survives this process exiting
