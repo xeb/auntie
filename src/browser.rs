@@ -35,7 +35,7 @@ impl BrowserServerConfig {
         verbose: bool,
     ) -> Self {
         let user_data_dir =
-            user_data_dir.unwrap_or_else(|| PathBuf::from(format!("/tmp/browser-cli/chrome-{}", port)));
+            user_data_dir.unwrap_or_else(|| PathBuf::from(format!("/tmp/auntie/chrome-{}", port)));
 
         // Find Chrome path - use provided path or search common locations
         let chrome_path = chrome_path.unwrap_or_else(Self::find_chrome);

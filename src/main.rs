@@ -14,7 +14,7 @@ use output::{format_error, format_result};
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[derive(Parser)]
-#[command(name = "browser", about = "Chrome browser automation CLI", version = VERSION)]
+#[command(name = "auntie", about = "Chrome browser automation CLI", version = VERSION)]
 struct Cli {
     #[command(subcommand)]
     command: Command,
@@ -781,8 +781,8 @@ fn create_server(cli: &Cli) -> BrowserServer {
 fn open_db() -> Result<BrowserDb> {
     let db_path = dirs::home_dir()
         .ok_or_else(|| anyhow!("Cannot determine home directory"))?
-        .join(".browser-cli")
-        .join("browser.db");
+        .join(".auntie")
+        .join("auntie.db");
     BrowserDb::open(&db_path)
 }
 

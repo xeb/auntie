@@ -1,41 +1,48 @@
-# browser-cli
+# auntie
 
 Chrome browser automation from the command line using the DevTools Protocol.
+
+## Why "auntie"?
+
+The name comes from William Gibson's novel *Agency*, where the AI persona "Eunice" has access to a set of autonomous AIs called "aunties." This tool is a companion to [eunice](https://github.com/xeb/eunice) - an agentic CLI runner - giving AI agents the ability to see and interact with the web.
 
 ## Installation
 
 ```bash
+# One-liner install (recommended)
+curl -sSf https://longrunningagents.com/auntie/install.sh | bash
+
 # From source
-git clone https://github.com/xeb/browser-cli.git
-cd browser-cli
+git clone https://github.com/xeb/auntie.git
+cd auntie
 make install
 
 # Or directly with cargo
-cargo install --git https://github.com/xeb/browser-cli.git
+cargo install --git https://github.com/xeb/auntie.git
 ```
 
 ## Quick Start
 
 ```bash
 # Start Chrome with remote debugging
-browser start
+auntie start
 
 # Navigate to a page
-browser open https://example.com
+auntie open https://example.com
 
 # Get page content
-browser page              # HTML
-browser page --markdown   # Markdown
+auntie page              # HTML
+auntie page --markdown   # Markdown
 
 # Take a screenshot
-browser screenshot shot.png
-browser screenshot shot.png --full-page
+auntie screenshot shot.png
+auntie screenshot shot.png --full-page
 
 # Execute JavaScript
-browser script "document.title"
+auntie script "document.title"
 
 # Stop Chrome
-browser stop
+auntie stop
 ```
 
 ## Commands
@@ -44,65 +51,65 @@ browser stop
 
 | Command | Description |
 |---------|-------------|
-| `browser start` | Start Chrome with remote debugging (port 9222) |
-| `browser start --headless` | Start in headless mode |
-| `browser stop` | Stop the running Chrome instance |
-| `browser status` | Check if Chrome is available |
+| `auntie start` | Start Chrome with remote debugging (port 9222) |
+| `auntie start --headless` | Start in headless mode |
+| `auntie stop` | Stop the running Chrome instance |
+| `auntie status` | Check if Chrome is available |
 
 ### Navigation
 
 | Command | Description |
 |---------|-------------|
-| `browser open <url>` | Navigate to URL |
-| `browser reload` | Reload current page |
-| `browser reload --hard` | Hard reload (bypass cache) |
-| `browser back` | Navigate back |
-| `browser forward` | Navigate forward |
+| `auntie open <url>` | Navigate to URL |
+| `auntie reload` | Reload current page |
+| `auntie reload --hard` | Hard reload (bypass cache) |
+| `auntie back` | Navigate back |
+| `auntie forward` | Navigate forward |
 
 ### Page Content
 
 | Command | Description |
 |---------|-------------|
-| `browser page` | Get page HTML |
-| `browser page --markdown` | Get page as Markdown |
-| `browser save <file>` | Save HTML to file |
-| `browser screenshot <file>` | Capture screenshot |
-| `browser screenshot <file> --full-page` | Full page screenshot |
-| `browser pdf <file>` | Save page as PDF |
+| `auntie page` | Get page HTML |
+| `auntie page --markdown` | Get page as Markdown |
+| `auntie save <file>` | Save HTML to file |
+| `auntie screenshot <file>` | Capture screenshot |
+| `auntie screenshot <file> --full-page` | Full page screenshot |
+| `auntie pdf <file>` | Save page as PDF |
 
 ### JavaScript
 
 | Command | Description |
 |---------|-------------|
-| `browser script "<code>"` | Execute JavaScript |
-| `browser script -f script.js` | Execute from file |
+| `auntie script "<code>"` | Execute JavaScript |
+| `auntie script -f script.js` | Execute from file |
 
 ### Tabs
 
 | Command | Description |
 |---------|-------------|
-| `browser tabs` | List open tabs |
-| `browser tab new` | Open new tab |
-| `browser tab new <url>` | Open new tab with URL |
-| `browser tab close <id>` | Close tab by ID |
+| `auntie tabs` | List open tabs |
+| `auntie tab new` | Open new tab |
+| `auntie tab new <url>` | Open new tab with URL |
+| `auntie tab close <id>` | Close tab by ID |
 
 ### DOM Interaction
 
 | Command | Description |
 |---------|-------------|
-| `browser find <selector>` | Find element by CSS selector |
-| `browser wait <selector>` | Wait for element to appear |
-| `browser click <selector>` | Click element |
-| `browser type <text>` | Type text |
-| `browser type <text> --selector <sel>` | Type into specific element |
-| `browser key <key>` | Press keyboard key (Enter, Tab, etc.) |
+| `auntie find <selector>` | Find element by CSS selector |
+| `auntie wait <selector>` | Wait for element to appear |
+| `auntie click <selector>` | Click element |
+| `auntie type <text>` | Type text |
+| `auntie type <text> --selector <sel>` | Type into specific element |
+| `auntie key <key>` | Press keyboard key (Enter, Tab, etc.) |
 
 ### Cookies
 
 | Command | Description |
 |---------|-------------|
-| `browser cookies` | List all cookies |
-| `browser cookie set <name> <value>` | Set a cookie |
+| `auntie cookies` | List all cookies |
+| `auntie cookie set <name> <value>` | Set a cookie |
 
 ### Credentials
 
@@ -110,16 +117,16 @@ Store and apply login credentials:
 
 ```bash
 # Add a credential
-browser cred add github --url "github.com/*" --username user --password pass
+auntie cred add github --url "github.com/*" --username user --password pass
 
 # List credentials
-browser cred list
+auntie cred list
 
 # Apply credential to current page (fills forms, injects cookies)
-browser cred apply github
+auntie cred apply github
 
 # Delete
-browser cred delete github
+auntie cred delete github
 ```
 
 ### Sessions
@@ -128,16 +135,16 @@ Save and restore browser sessions:
 
 ```bash
 # Save current cookies as a session
-browser session save my-session
+auntie session save my-session
 
 # List sessions
-browser session list
+auntie session list
 
 # Load a session (restores cookies)
-browser session load my-session
+auntie session load my-session
 
 # Delete
-browser session delete my-session
+auntie session delete my-session
 ```
 
 ## Global Options
@@ -154,17 +161,17 @@ browser session delete my-session
 
 ## Output Formats
 
-By default, browser-cli uses human-readable output for TTY and JSON for pipes:
+By default, auntie uses human-readable output for TTY and JSON for pipes:
 
 ```bash
 # Human readable
-browser tabs
+auntie tabs
 
 # JSON output (automatic when piping)
-browser tabs | jq '.tabs[0].url'
+auntie tabs | jq '.tabs[0].url'
 
 # Force JSON
-browser tabs --json
+auntie tabs --json
 ```
 
 ## Examples
@@ -172,49 +179,49 @@ browser tabs --json
 ### Login to a website
 
 ```bash
-browser start
-browser open https://example.com/login
-browser type "username" --selector "input[name=username]"
-browser type "password" --selector "input[type=password]"
-browser click "button[type=submit]"
-browser wait ".dashboard"
-browser session save example-login
+auntie start
+auntie open https://example.com/login
+auntie type "username" --selector "input[name=username]"
+auntie type "password" --selector "input[type=password]"
+auntie click "button[type=submit]"
+auntie wait ".dashboard"
+auntie session save example-login
 ```
 
 ### Scrape page content
 
 ```bash
-browser start
-browser open https://news.ycombinator.com
-browser page --markdown > hn.md
+auntie start
+auntie open https://news.ycombinator.com
+auntie page --markdown > hn.md
 ```
 
 ### Automate form submission
 
 ```bash
-browser start
-browser open https://example.com/form
-browser type "John Doe" --selector "#name"
-browser type "john@example.com" --selector "#email"
-browser click "#submit"
-browser screenshot confirmation.png
+auntie start
+auntie open https://example.com/form
+auntie type "John Doe" --selector "#name"
+auntie type "john@example.com" --selector "#email"
+auntie click "#submit"
+auntie screenshot confirmation.png
 ```
 
 ### Use with jq
 
 ```bash
 # Get first tab URL
-browser tabs --json | jq -r '.tabs[0].url'
+auntie tabs --json | jq -r '.tabs[0].url'
 
 # Get all cookie names
-browser cookies --json | jq -r '.cookies[].name'
+auntie cookies --json | jq -r '.cookies[].name'
 ```
 
 ## Data Storage
 
-browser-cli stores data in `~/.browser-cli/`:
+auntie stores data in `~/.auntie/`:
 
-- `browser.db` - SQLite database for credentials, sessions, and state
+- `auntie.db` - SQLite database for credentials, sessions, and state
 
 ## Requirements
 

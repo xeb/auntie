@@ -8,7 +8,7 @@ RESET := \033[0m
 
 help: ## Show this help menu
 	@echo ""
-	@echo "$(CYAN)browser-cli$(RESET) - Chrome browser automation CLI"
+	@echo "$(CYAN)auntie$(RESET) - Chrome browser automation CLI"
 	@echo ""
 	@echo "$(YELLOW)Usage:$(RESET)"
 	@echo "  make $(GREEN)<target>$(RESET)"
@@ -33,5 +33,5 @@ test: ## Run tests
 	cargo test
 
 binary-size: release ## Show release binary size
-	@size=$$(ls -lh target/release/browser | awk '{print $$5}'); \
-	echo "$(GREEN)Binary size: $$size$(RESET)"
+	@size=$$(ls -lh target/release/auntie | awk '{print $$5}'); \
+	echo "$(GREEN)auntie binary size: $$size$(RESET)"

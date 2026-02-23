@@ -1,17 +1,17 @@
 [package]
-name = "browser-cli"
+name = "auntie"
 version = "0.1.0"
 edition = "2021"
 description = "Chrome browser automation CLI using DevTools Protocol"
 license = "MIT"
 authors = ["Mark Kockerbeck <xeb@hey.com>"]
-repository = "https://github.com/xeb/browser-cli"
+repository = "https://github.com/xeb/auntie"
 readme = "README.md"
 keywords = ["browser", "chrome", "automation", "devtools", "cli"]
 categories = ["command-line-utilities", "development-tools"]
 
 [[bin]]
-name = "browser"
+name = "auntie"
 path = "src/main.rs"
 
 [dependencies]

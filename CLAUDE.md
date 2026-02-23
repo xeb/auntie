@@ -1,15 +1,15 @@
-# browser-cli - Development Guide
+# auntie - Development Guide
 
 ## About
 
-browser-cli is a Chrome browser automation CLI using the DevTools Protocol. It communicates with Chrome via WebSocket to control navigation, DOM interaction, screenshots, and more.
+auntie is a Chrome browser automation CLI using the DevTools Protocol. It communicates with Chrome via WebSocket to control navigation, DOM interaction, screenshots, and more.
 
 ## Architecture
 
 ```
 CLI (main.rs) → BrowserServer (browser.rs) → Chrome DevTools Protocol (WebSocket)
                      ↓
-               BrowserDb (db.rs) → SQLite (~/.browser-cli/browser.db)
+               BrowserDb (db.rs) → SQLite (~/.auntie/auntie.db)
 ```
 
 ### Key Components
@@ -94,8 +94,8 @@ make clean      # Clean artifacts
 ## Design Decisions
 
 1. **Synchronous API**: Uses blocking WebSocket for simplicity
-2. **Detached Chrome**: `browser start` detaches Chrome process so it survives CLI exit
-3. **Port-based stop**: `browser stop` finds Chrome via `lsof` on the debugging port
+2. **Detached Chrome**: `auntie start` detaches Chrome process so it survives CLI exit
+3. **Port-based stop**: `auntie stop` finds Chrome via `lsof` on the debugging port
 4. **SQLite storage**: Credentials and sessions persisted in user's home directory
 5. **Auto JSON output**: Detects TTY to choose human vs JSON format
 
@@ -117,9 +117,9 @@ make clean      # Clean artifacts
 Currently no automated tests. Manual testing workflow:
 
 ```bash
-browser start
-browser open https://example.com
-browser page
-browser screenshot test.png
-browser stop
+auntie start
+auntie open https://example.com
+auntie page
+auntie screenshot test.png
+auntie stop
 ```
